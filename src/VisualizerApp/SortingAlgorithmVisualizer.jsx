@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+// This program visualizes popular algorithms.
+// Animations are done with async javascript.
 
-import "./VisualizerApp.css";
+import React, { useState } from "react"; // Import react and its hooks
+import "./VisualizerApp.css"; // Import CSS
+
+// Import sorting algorithms
 import bubbleSort from "./SortingAlgorithms/bubbleSort";
 import selectionSort from "./SortingAlgorithms/selectionSort";
 import insertionSort from "./SortingAlgorithms/insertionSort";
@@ -11,9 +15,10 @@ function SortingAlgorithmVisualizer() {
   const min = 5;
 
   // State
-  const [array, setArray] = useState(getRandomArray(max, min));
-  const [isSorting, setIsSorting] = useState(false);
+  const [array, setArray] = useState(getRandomArray(max, min)); // Holds the current array for visualization
+  const [isSorting, setIsSorting] = useState(false); // Flags whether a sorting algorithm is currently running
 
+  // Functions to run sorting algorithms.
   async function doBubbleSort() {
     await bubbleSort(array, setArray, setIsSorting); // Use the function
   }  
@@ -38,7 +43,9 @@ function SortingAlgorithmVisualizer() {
         <div className="bar" style={{ height: `${value}px` }} key={index}></div>
       ))}
       <br />
+      {/*Generate new array on click*/}
       <button onClick={newArray} disabled={isSorting}>New Array</button>
+      {/*Buttons to run sorting algorithms on click*/}
       <button onClick={doBubbleSort} disabled={isSorting}>Bubble Sort</button>
       <button onClick={doSelectionSort} disabled={isSorting}>Selection Sort</button>
       <button onClick={doInsertionSort} disabled={isSorting}>Insertion Sort</button>
@@ -46,12 +53,13 @@ function SortingAlgorithmVisualizer() {
   );
 }
 
+// Get random array from interval
 function getRandomArray(max, min) {
   const randomArray = [];
 
   for (let i = 0; i < 100; i++) {
     const randomNumber = Math.floor(Math.random() * (max - 1 + min)) + min;
-    randomArray.push(randomNumber);
+    randomArray.push(randomNumber); // Add number to new array.
   }
 
   return randomArray;
